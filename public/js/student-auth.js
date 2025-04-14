@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <img src="${student.photoUrl || '/assets/images/no-image.png'}" alt="Student Photo" class="student-photo">
                 <p><strong>Name:</strong> ${student.name || 'N/A'}</p>
                 <p><strong>Student ID:</strong> ${student.studentId || 'N/A'}</p>
-                <p><strong>Roll No:</strong> ${student.rollNo || 'N/A'}</p>
+                <p><strong>Roll No:</strong> ${student.rollNumber || 'N/A'}</p>
                 <p><strong>Department:</strong> ${student.department || 'N/A'}</p>
                 `;
         } else {
