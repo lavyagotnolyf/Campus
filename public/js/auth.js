@@ -9,27 +9,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const togglePrompt = document.getElementById('toggle-prompt');
     const toggleButton = document.getElementById('toggle-button');
 
-    // Input fields (Changed email to username)
+    // Input fields
     const firstNameInput = document.getElementById('firstName');
     const lastNameInput = document.getElementById('lastName');
-    const usernameInput = document.getElementById('username'); // Uses username
+    const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirmPassword');
 
-    // Error message paragraphs (Changed errorEmail to errorUsername)
+    // Error message paragraphs
     const errorGeneral = document.getElementById('error-general');
-    const errorUsername = document.getElementById('error-username'); // Uses username error element
+    const errorUsername = document.getElementById('error-username');
     const errorPassword = document.getElementById('error-password');
     const errorConfirmPassword = document.getElementById('error-confirmPassword');
 
     // --- State Variables ---
     let isSignUp = false; // Start in Sign In mode
-    // let loading = false; // Loading state less relevant for instant hardcoded check
+    let loading = false;
 
     let formData = {
         firstName: '',
         lastName: '',
-        username: '', // Uses username
+        username: '',
         password: '',
         confirmPassword: ''
     };
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submitButton.textContent = 'Sign Up';
             togglePrompt.textContent = 'Already have an account?';
             toggleButton.textContent = 'Sign In';
-            submitButton.disabled = false; // Ensure button is enabled in sign-up mode initially
+            submitButton.disabled = false;
         } else {
             formTitle.textContent = 'Sign In';
             signupFields.classList.add('hidden');
@@ -51,11 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
             submitButton.textContent = 'Sign In';
             togglePrompt.textContent = "Don't have an account?";
             toggleButton.textContent = 'Sign Up';
-            submitButton.disabled = false; // Ensure button is enabled
+            submitButton.disabled = false;
         }
         clearErrors();
         clearForm();
-        formData = { firstName: '', lastName: '', username: '', password: '', confirmPassword: '' }; // Reset with username
+        formData = { firstName: '', lastName: '', username: '', password: '', confirmPassword: '' };
     }
 
     updateUIForMode(); // Set initial state (Sign In)
@@ -70,37 +70,75 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Handle form submission
-    authForm.addEventListener('submit', (e) => { // Removed 'async' as fetch is removed
+    authForm.addEventListener('submit', async (e) => {
         e.preventDefault(); // Prevent default page reload
 
         if (!validateForm()) {
             return; // Stop submission if validation fails
         }
 
-        // --- Hardcoded Logic ---
-        if (isSignUp) {
-            // Handle Sign Up attempt (Temporary: Show message)
-            showError(errorGeneral, 'Sign up is temporarily disabled.');
-            console.log('Sign up attempt blocked (hardcoded).');
+        submitButton.disabled = true; // Disable button during submission
+        loading = true;
+        clearErrors();
 
-        } else {
-            // Handle Sign In attempt (Temporary: Hardcoded check)
-            if (formData.username === 'guard' && formData.password === 'password123') {
-                // Login successful
-                clearErrors();
-                console.log('Hardcoded login successful!');
+        const endpoint = isSignUp ? 'http://localhost:5000/auth/signup' : 'http://localhost:5000/auth/login';
+        const method = 'POST';
 
-                // --- >>> CHANGE: Redirect to student-auth.html <<< ---
-                window.location.href = 'index.html';
+        try {
+            const response = await fetch(endpoint, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
 
+            const data = await response.json();
+
+            if (response.ok) {
+                // Successful sign-up or sign-in
+                console.log('Success:', data);
+                if (isSignUp) {
+                    showError(errorGeneral, 'Sign up successful! You can now sign in.');
+                    // Optionally, automatically switch to the sign-in form
+                    setTimeout(() => {
+                        isSignUp = false;
+                        updateUIForMode();
+                    }, 1500);
+                } else {
+                    // --- >>> CHANGE: Redirect to index.html on successful login <<< ---
+                    window.location.href = 'index.html';
+                }
             } else {
-                // Login failed
-                showError(errorGeneral, 'Invalid username or password.');
-                console.log('Hardcoded login failed!');
+                // Error during sign-up or sign-in
+                console.error('Error:', data);
+                if (data.errors) {
+                    // Handle specific errors from the backend
+                    if (data.errors.username) {
+                        showError(errorUsername, data.errors.username);
+                    }
+                    if (data.errors.password) {
+                        showError(errorPassword, data.errors.password);
+                    }
+                    if (data.errors.confirmPassword) {
+                        showError(errorConfirmPassword, data.errors.confirmPassword);
+                    }
+                    if (data.errors.general) {
+                        showError(errorGeneral, data.errors.general);
+                    }
+                } else if (data.message) {
+                    showError(errorGeneral, data.message);
+                } else {
+                    showError(errorGeneral, 'An unexpected error occurred.');
+                }
             }
+        } catch (error) {
+            console.error('Fetch error:', error);
+            showError(errorGeneral, 'Failed to connect to the server.');
+        } finally {
+            submitButton.disabled = false; // Re-enable button
+            loading = false;
         }
-        // --- End of Hardcoded Logic ---
-
     }); // End of submit handler
 
     // Handle toggle button click
@@ -115,9 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
         clearErrors();
         let isValid = true;
 
-        // Username Check (Changed from Email)
-        if (!formData.username) { // Check if username is empty
-            showError(errorUsername, 'Please enter a username.'); // Use errorUsername
+        // Username Check
+        if (!formData.username) {
+            showError(errorUsername, 'Please enter a username.');
             isValid = false;
         }
 
@@ -137,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
                  showError(errorGeneral, 'Last name is required.');
                 isValid = false;
             }
-             if (!formData.username) { // Also check username on signup
+             if (!formData.username) {
                 showError(errorUsername, 'Please enter a username.');
                 isValid = false;
             }
@@ -158,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function clearErrors() {
         errorGeneral.textContent = '';
-        errorUsername.textContent = ''; // Uses username error element
+        errorUsername.textContent = '';
         errorPassword.textContent = '';
         errorConfirmPassword.textContent = '';
     }
