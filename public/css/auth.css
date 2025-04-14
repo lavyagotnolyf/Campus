@@ -1,0 +1,136 @@
+/* Basic Reset & Body */
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#background-container {
+    min-height: 100vh;         /* min-h-screen */
+    display: flex;             /* flex */
+    align-items: center;       /* items-center */
+    justify-content: center;   /* justify-center */
+    background-size: cover;    /* bg-cover */
+    background-position: center; /* bg-center */
+    /* --- IMPORTANT: Update the path to your background image --- */
+    background-image: url('../assets/composition-9.png'); /* Assumes image is in an 'assets' folder */
+}
+
+#form-container {
+    /* --- Gradient Background --- (Tailwind gray-900 to gray-700) */
+    background-image: linear-gradient(to bottom right, #111827, #374151);
+    padding: 2.5rem;           /* p-10 */
+    border-radius: 0.75rem;    /* rounded-xl */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+    max-width: 28rem;          /* max-w-md */
+    width: 90%;               /* Make it responsive on smaller screens */
+    height: auto;             /* Allow height to adjust, React code had fixed h-[32rem] */
+    margin-left: 0;           /* Removed ml-[-5rem], adjust if needed */
+    display: flex;
+    flex-direction: column;   /* flex-col */
+    justify-content: center;  /* justify-center (vertically within the box) */
+}
+
+#form-title {
+    font-size: 1.5rem;         /* text-2xl */
+    line-height: 2rem;
+    font-weight: 700;          /* font-bold */
+    text-align: center;        /* text-center */
+    color: #ffffff;            /* text-white */
+    margin-bottom: 1rem;       /* mb-4 */
+}
+
+#auth-form {
+    width: 100%;
+}
+
+/* Apply spacing between direct children of the form */
+#auth-form > div {
+    margin-top: 1rem;          /* Approximates space-y-4 */
+}
+#auth-form > div:first-child {
+    margin-top: 0; /* No margin above the first element */
+}
+
+
+/* Grid for First/Last Name */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* grid-cols-2 */
+    gap: 0.5rem;               /* gap-2 */
+}
+
+.form-input {
+    border: 1px solid #4b5563; /* border, adjusted color for dark bg */
+    padding: 0.5rem;           /* p-2 */
+    width: 100%;              /* w-full */
+    border-radius: 0.25rem;    /* rounded */
+    background-color: #1f2937; /* bg-gray-800 */
+    color: #ffffff;            /* text-white */
+    box-sizing: border-box;   /* Include padding/border in width */
+}
+
+.form-input::placeholder { /* Style placeholder text */
+    color: #9ca3af; /* gray-400 */
+}
+
+.submit-button {
+    background-color: #6366F1; /* bg-indigo-500 */
+    color: #ffffff;            /* text-white */
+    padding: 0.75rem 0.5rem;   /* Adjusted padding for better look */
+    width: 100%;              /* w-full */
+    border: none;
+    border-radius: 0.25rem;    /* rounded */
+    margin-top: 1rem;          /* Spacing above button */
+    cursor: pointer;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1); /* transition */
+    font-weight: 600;          /* Make text bolder */
+}
+
+.submit-button:hover {
+    background-color: #4F46E5; /* hover:bg-indigo-600 */
+}
+
+.submit-button:disabled {
+    opacity: 0.7;             /* Style for disabled state */
+    cursor: not-allowed;
+}
+
+/* Text below form for toggling */
+.toggle-text {
+    text-align: center;        /* text-center */
+    margin-top: 1rem;          /* mt-4 */
+    color: #ffffff;            /* text-white */
+    font-size: 0.9rem;
+}
+
+.toggle-button {
+    color: #818CF8;            /* text-indigo-400 */
+    background: none;
+    border: none;
+    padding: 0;
+    margin-left: 0.25rem;
+    cursor: pointer;
+    font-size: inherit;        /* Match surrounding text size */
+}
+
+.toggle-button:hover {
+    text-decoration: underline; /* hover:underline */
+}
+
+/* Error message styling */
+.error-message {
+    color: #EF4444;            /* text-red-500 */
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    min-height: 1em; /* Reserve space even when empty */
+}
+
+#error-general {
+    text-align: center;
+    margin-bottom: 1rem; /* Add space below general error */
+}
+
+/* Class to hide/show elements */
+.hidden {
+    display: none;
+}

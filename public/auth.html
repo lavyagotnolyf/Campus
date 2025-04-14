@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+    <link rel="stylesheet" href="css/auth.css"> </head>
+<body>
+    <div id="background-container">
+        <div id="form-container">
+            <h2 id="form-title">Sign In</h2>
+            <p id="error-general" class="error-message"></p>
+            <form id="auth-form" novalidate>
+                <div id="signup-fields" class="signup-only grid-container">
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name" class="form-input">
+                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" class="form-input">
+                </div>
+                <div>
+                    <input type="text" id="username" name="username" placeholder="Username" class="form-input" required>
+                    <p id="error-username" class="error-message"></p> </div>
+                <div>
+                    <input type="password" id="password" name="password" placeholder="Password" class="form-input" required>
+                    <p id="error-password" class="error-message"></p>
+                </div>
+                <div id="confirm-password-field" class="signup-only">
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" class="form-input">
+                    <p id="error-confirmPassword" class="error-message"></p>
+                </div>
+
+                <button type="submit" id="submit-button" class="submit-button">
+                    Sign In
+                </button>
+            </form>
+
+            <p class="toggle-text">
+                <span id="toggle-prompt">Don't have an account?</span>
+                <button id="toggle-button" class="toggle-button">Sign Up</button>
+            </p>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script> </body>
+</html>

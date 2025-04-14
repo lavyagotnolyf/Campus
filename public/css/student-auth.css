@@ -1,0 +1,257 @@
+/* Basic Reset & Body */
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    /* background-color: #f0f4f8; */ /* Removed light background color */
+    /* color: #333; */ /* Default color will be inherited or set specifically */
+    line-height: 1.6;
+
+    /* --- Background image settings --- */
+    background-image: url('../assets/composition-9.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.page-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.page-header {
+    margin-bottom: 1.5rem; /* Keep existing margin */
+    padding: 1rem 1.25rem; /* Add padding similar to card-header */
+
+    /* --- Style properties copied/adapted from .card --- */
+    background-image: linear-gradient(to bottom right, #111827, #374151); /* Dark gradient */
+    color: #d1d5db; /* Default light text color like .card */
+    border-radius: 0.75rem; /* Match card's border-radius */
+    border: 1px solid #4b5563; /* Match card's border */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2); /* Match card's shadow */
+    /* --- End of copied styles --- */
+
+    /* Remove border-bottom if copying full card style */
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
+}
+
+.page-header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    /* Ensure text is clearly visible on dark gradient */
+    color: #ffffff;
+    text-shadow: none; /* Remove shadow, background provides contrast */
+}
+
+.page-header p {
+    /* Lighter muted color on dark background */
+    color: #9ca3af; /* Tailwind gray-400 */
+    font-size: 0.95rem;
+    text-shadow: none; /* Remove shadow */
+    margin-bottom: 0; /* Adjust margin if needed */
+}
+
+/* Main Grid Layout */
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+    .main-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .auth-methods-column {
+        grid-column: span 1 / span 1;
+    }
+    .student-details-column {
+        grid-column: span 2 / span 2;
+    }
+}
+
+/* Card Styling */
+.card {
+    /* Change: Apply dark gradient background */
+    background-image: linear-gradient(to bottom right, #111827, #374151);
+    /* Change: Set default text color for card content */
+    color: #d1d5db; /* Tailwind gray-300 */
+    border-radius: 0.75rem; /* rounded-xl */
+    /* Change: Darker border */
+    border: 1px solid #4b5563; /* Tailwind gray-600 */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2); /* Adjusted shadow for dark */
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+.card:hover {
+     box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    padding: 1rem 1.25rem;
+    /* Change: Darker border */
+    border-bottom: 1px solid #4b5563;
+}
+.card-header h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    /* Change: Explicitly light color */
+    color: #ffffff;
+}
+.card-header p {
+     /* Change: Lighter muted color */
+     color: #9ca3af; /* Tailwind gray-400 */
+     font-size: 0.875rem;
+     margin-bottom: 0.5rem;
+}
+
+
+.card-content {
+    padding: 1.25rem;
+}
+
+/* Tabs */
+.tabs-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Change: Darker background */
+    background-color: #1f2937; /* Tailwind gray-800 */
+    border-radius: 0.375rem;
+    padding: 0.2rem;
+    margin-top: 0.5rem;
+}
+
+.tab-trigger {
+    background-color: transparent;
+    border: none;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    /* Change: Lighter muted color */
+    color: #9ca3af; /* Tailwind gray-400 */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tab-trigger.active {
+    /* Change: Slightly lighter dark background for active tab */
+    background-color: #374151; /* Tailwind gray-700 */
+     /* Change: White text for active tab */
+    color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2); /* Adjusted shadow */
+}
+.tab-trigger:not(.active):hover {
+    /* Change: White text on hover */
+    color: #ffffff;
+}
+
+
+/* Tab Content */
+.tab-content {
+    margin-top: 1rem;
+}
+.hidden {
+    display: none;
+}
+
+/* Face Recognition Elements */
+#webcam-container {
+    margin-bottom: 1rem;
+    /* Change: Darker border */
+    border: 1px solid #4b5563;
+    display: inline-block;
+    background-color: #000; /* Add black background behind video */
+}
+#webcam {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* ID Search Elements */
+label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+     /* Change: Light color */
+    color: #d1d5db; /* Tailwind gray-300 */
+}
+.search-input {
+    width: 100%;
+    padding: 0.6rem;
+    /* Change: Darker border */
+    border: 1px solid #4b5563;
+    border-radius: 0.375rem;
+    box-sizing: border-box;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    /* Change: Dark background, light text */
+    background-color: #1f2937; /* Tailwind gray-800 */
+    color: #ffffff;
+}
+.search-input::placeholder {
+     /* Change: Lighter placeholder */
+     color: #9ca3af; /* Tailwind gray-400 */
+}
+
+
+.action-button {
+    display: inline-block;
+    width: 100%;
+    padding: 0.6rem 1rem;
+    background-color: #4f46e5; /* Indigo background - stands out on dark */
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.2s ease;
+    margin-bottom: 0.5rem;
+}
+.action-button:hover {
+    background-color: #4338ca; /* Darker indigo */
+}
+
+/* Status Messages */
+#face-status-message,
+#search-status-message {
+    font-size: 0.85rem;
+    /* Change: Lighter muted color */
+    color: #9ca3af; /* Tailwind gray-400 */
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+/* Student Details */
+#student-details-content .student-photo {
+    display: block;
+    float: right;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+    width: 100px;
+    height: 100px;
+    border-radius: 0.375rem;
+    object-fit: cover;
+     /* Change: Darker border */
+    border: 1px solid #4b5563;
+}
+
+#student-details-content p {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+     /* Change: Default text color inherited from .card should be light */
+}
+
+#student-details-content p strong {
+     /* Change: Lighter color for strong text */
+    color: #e5e7eb; /* Tailwind gray-200 */
+    margin-right: 0.5rem;
+}

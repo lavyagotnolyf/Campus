@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Authentication</title>
+    <link rel="stylesheet" href="css/student-auth.css">
+</head>
+<body>
+    <div class="page-container">
+        <header class="page-header">
+            <h1>Student Authentication</h1>
+            <p>Verify student identity using face recognition or ID</p>
+        </header>
+
+        <main class="main-grid">
+            <div class="auth-methods-column">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Authentication Method</h2>
+                        <p>Choose how to authenticate students</p>
+                        <div class="tabs-list">
+                            <button id="tab-face" class="tab-trigger active" data-tab="face">Face Recognition</button>
+                            <button id="tab-id" class="tab-trigger" data-tab="id">ID Search</button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div id="content-face" class="tab-content active">
+                            <div id="webcam-container">
+                                <video id="webcam" width="320" height="240" autoplay playsinline></video>
+                            </div>
+                            <button id="scan-button" class="action-button">Scan Student Face</button>
+                            <p id="face-status-message">Position student face and click Scan.</p>
+                             <canvas id="snapshot-canvas" style="display: none;"></canvas>
+                        </div>
+                        <div id="content-id" class="tab-content hidden">
+                            <label for="search-input">Student ID or Name:</label>
+                            <input type="text" id="search-input" name="search-input" class="search-input">
+                            <button id="search-button" class="action-button">Search Student</button>
+                            <p id="search-status-message">Enter ID or Name and click Search.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="student-details-column">
+                <div id="student-details-card" class="card">
+                     <div class="card-header">
+                        <h2>Student Details</h2>
+                     </div>
+                     <div class="card-content" id="student-details-content">
+                        <p>Scan face or search by ID to view student details.</p>
+                        </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script defer src="js/face-api.min.js"></script>
+<script src="js/student-auth.js"></script>
+</body>
+</html>
