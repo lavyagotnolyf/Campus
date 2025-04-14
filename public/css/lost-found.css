@@ -1,0 +1,724 @@
+/* --- START: lost-found.css --- */
+
+/* --- Reset & Base --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    color: #d1d5db; /* Default light text color (Tailwind gray-300) */
+
+    /* --- Background image settings --- */
+    /* Make sure the path is correct relative to THIS CSS file */
+    /* Example: ../assets/composition-9.png */
+    background-image: url('../assets/composition-9.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #ffffff; /* White headings */
+}
+
+h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+h2 {
+   font-size: 1.15rem;
+   font-weight: 600;
+   margin-bottom: 0.2rem;
+}
+
+h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+p {
+     /* Default paragraphs lighter */
+     color: #d1d5db;
+}
+
+p.muted {
+    color: #9ca3af; /* Lighter muted color (Tailwind gray-400) */
+    font-size: 0.875rem; /* text-sm */
+}
+
+a {
+    color: #60a5fa; /* Lighter blue for links (Tailwind blue-400) */
+    text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+/* --- Layout --- */
+.dashboard-layout {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.page-header {
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.25rem;
+    background-image: linear-gradient(to bottom right, #111827, #374151); /* Dark gradient */
+    color: #d1d5db; /* Default light text color */
+    border-radius: 0.75rem;
+    border: 1px solid #4b5563;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-header h1 {
+    color: #ffffff;
+}
+
+.page-header p.muted {
+    color: #9ca3af;
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 1024px) { /* lg: */
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* --- Components --- */
+
+/* Card Styling */
+.card {
+    background-image: linear-gradient(to bottom right, #111827, #374151);
+    color: #d1d5db;
+    border-radius: 0.75rem;
+    border: 1px solid #4b5563;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+.card:hover {
+     box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #4b5563;
+}
+.card-header h2 {
+    color: #ffffff;
+}
+.card-header p.muted {
+     color: #9ca3af;
+     font-size: 0.875rem;
+     margin-bottom: 0;
+}
+
+.card-content {
+    padding: 1.25rem;
+}
+
+/* Stat Card Specifics (Used on other pages, keep for consistency if dashboard layout is shared) */
+.stat-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    min-height: 28px;
+    color: #ffffff;
+}
+.stat-card p.muted {
+    color: #9ca3af;
+}
+
+/* Stat Icons */
+.stat-icon-bg {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #374151; /* Tailwind gray-700 */
+}
+.stat-icon-bg .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    stroke-width: 2;
+}
+.icon.green-text { color: #22c55e; }
+.icon.teal-text { color: #14b8a6; }
+.icon.red-text { color: #ef4444; }
+
+
+/* Button Styling */
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.button .icon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    stroke: currentColor;
+    stroke-width: 2;
+}
+
+/* Primary Button */
+.button.primary {
+    background-color: #4f46e5; /* Indigo background */
+    color: white;
+    border: none;
+}
+.button.primary:hover {
+    background-color: #4338ca; /* Darker indigo */
+}
+.button.primary:disabled {
+    background-color: #374151;
+    cursor: not-allowed;
+}
+.button.primary .loader {
+    color: white;
+}
+
+
+/* Outline Button */
+.button.outline {
+    border-color: #4b5563;
+    background-color: transparent;
+    color: #d1d5db;
+}
+.button.outline:hover {
+    background-color: #374151;
+    border-color: #6b7280;
+    color: #ffffff;
+}
+
+.button.full-width {
+    width: 100%;
+    margin-top: 0.75rem;
+}
+
+
+/* Table (Used on other pages, keep for consistency if layout shared) */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+.table th, .table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #4b5563;
+}
+.table th {
+    font-weight: 600;
+    color: #9ca3af;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    background-color: #1f2937;
+}
+.table td {
+    font-size: 0.875rem;
+    color: #d1d5db;
+}
+.table tbody tr:nth-child(even) {
+    background-color: #1f2937;
+}
+.table tbody tr:hover {
+    background-color: #374151;
+}
+.table .text-center { text-align: center; }
+.table-loader { /* Also used for item loader */
+    text-align: center;
+    padding: 2rem;
+    color: #9ca3af;
+}
+
+/* Badge Styling */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid transparent;
+    background-color: #374151; /* Base dark background */
+    flex-shrink: 0; /* Prevent badges from shrinking in flex layouts */
+}
+
+/* Status Badges */
+.badge-green { /* Claimed / Inside */
+    color: #4ade80;
+    background-color: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+.badge-outline { /* Departed */
+    color: #9ca3af;
+    background-color: #1f2937;
+    border: 1px solid #4b5563;
+}
+.badge-destructive { /* Flagged */
+    color: #f87171;
+    background-color: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+.badge-secondary { /* Default/Other Status */
+    color: #9ca3af;
+    background-color: #1f2937;
+    border: 1px solid #4b5563;
+}
+.badge-blue { /* Unclaimed / Student */
+    color: #60a5fa;
+    background-color: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+.badge-amber { /* Pending / Accessories */
+    color: #fbbf24;
+    background-color: rgba(251, 191, 36, 0.15);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+/* Type Badges (Vehicle/User Type specific) */
+.badge-purple { /* Staff */
+    color: #a78bfa;
+    background-color: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+}
+.badge-orange { /* Visitor */
+    color: #fb923c;
+    background-color: rgba(249, 115, 22, 0.15);
+    border: 1px solid rgba(249, 115, 22, 0.3);
+}
+.badge-gray { /* Unknown */
+    color: #9ca3af;
+    background-color: #1f2937;
+    border: 1px solid #4b5563;
+}
+
+/* Dialog (Modal) Styling */
+.dialog-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+.dialog-content {
+    background-image: linear-gradient(to bottom right, #111827, #374151);
+    color: #d1d5db;
+    border-radius: 0.75rem;
+    border: 1px solid #4b5563;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    overflow: hidden; /* Ensure content respects border radius */
+    max-height: 90vh; /* Prevent dialog becoming too tall */
+    display: flex; /* Enable flex for scrolling content */
+    flex-direction: column;
+}
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #4b5563;
+    padding: 1rem 1.25rem;
+    flex-shrink: 0; /* Prevent header shrinking */
+}
+.dialog-header h2 { color: #ffffff; }
+.dialog-header p.muted { color: #9ca3af; margin-bottom: 0; }
+
+.dialog-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #9ca3af;
+    padding: 0.25rem;
+    margin-top: -0.25rem;
+    margin-right: -0.5rem;
+}
+.dialog-close-btn:hover { color: #ffffff; }
+
+/* Dialog form content area */
+#dialogFormContent {
+     padding: 1.25rem;
+     overflow-y: auto; /* Allow content to scroll if needed */
+     flex-grow: 1; /* Allow content to take available space */
+}
+
+.dialog-footer {
+    border-top: 1px solid #4b5563;
+    padding: 1rem 1.25rem;
+    margin-top: 0;
+    display: flex;
+    justify-content: flex-end;
+    background-color: #1f2937;
+    gap: 0.5rem;
+    flex-shrink: 0; /* Prevent footer shrinking */
+}
+
+/* Form Styling */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.form-item label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #d1d5db;
+}
+.form-item input,
+.form-item textarea, /* Added textarea */
+.form-item .select-input { /* Target select via class */
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #4b5563;
+    border-radius: 0.375rem;
+    box-sizing: border-box;
+    font-size: 0.95rem;
+    background-color: #1f2937;
+    color: #ffffff;
+}
+.form-item input::placeholder,
+.form-item textarea::placeholder { /* Added textarea */
+     color: #9ca3af;
+}
+.form-item input:focus,
+.form-item textarea:focus, /* Added textarea */
+.form-item .select-input:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.3);
+}
+.form-item .error-message {
+    color: #f87171;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    min-height: 1em;
+}
+
+/* Form Grid Layout Helper */
+.form-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+/* Select Input Styling */
+.select-input {
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%239ca3af" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1.2em;
+    padding-right: 2.5rem;
+}
+.select-input option {
+    background-color: #1f2937;
+    color: #ffffff;
+}
+
+/* --- Utilities --- */
+.hidden {
+    display: none !important;
+}
+
+.loader {
+    display: inline-block;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid currentColor;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    vertical-align: middle;
+    margin-right: 0.25rem;
+    color: #9ca3af; /* Default loader color */
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+
+/* --- START: Lost & Found Specific Styles --- */
+
+/* Margin Bottom Utility */
+.mb-6 {
+    margin-bottom: 1.5rem; /* Matches gap */
+}
+
+/* Filter Bar */
+.filter-bar {
+    padding: 0.75rem; /* Less padding for filter bar */
+}
+.filter-buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem; /* Gap between filter buttons */
+}
+.filter-button {
+    /* Use outline button style as base */
+    border-color: #4b5563;
+    background-color: transparent;
+    color: #d1d5db;
+    padding: 0.4rem 0.8rem; /* Smaller padding */
+    font-size: 0.8rem; /* Smaller font */
+    /* Inherits .button styles like flex, align-items, etc. */
+}
+/* Ensure outline hover is specific enough */
+.button.outline.filter-button:hover {
+    background-color: #374151;
+    border-color: #6b7280;
+    color: #ffffff;
+}
+/* Active filter uses primary style */
+.filter-button.active {
+    background-color: #4f46e5;
+    color: white;
+    border-color: #4f46e5;
+}
+.filter-button .icon {
+    width: 0.9rem;
+    height: 0.9rem;
+    margin-right: 0.3rem;
+    stroke-width: 2.5; /* Make icon slightly bolder */
+}
+.filter-icon { /* Specific class if needed */
+     vertical-align: middle; /* Align icon better */
+     margin-bottom: 2px; /* Adjust alignment */
+}
+
+/* Item Grid */
+.item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 1.5rem;
+}
+
+/* Item Card */
+.item-card {
+    /* Inherits .card style */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+/* Ensure item card hover specificity */
+.card.item-card:hover {
+    transform: translateY(-4px);
+    /* box-shadow already handled by .card:hover */
+}
+
+.item-image-placeholder {
+    background-color: rgba(255, 255, 255, 0.05); /* Subtle lighter background */
+    aspect-ratio: 16 / 9; /* Fixed aspect ratio */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-bottom: 1px solid #4b5563; /* Add border */
+    overflow: hidden; /* Ensure image respects container */
+}
+.item-image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the area */
+}
+.item-image-placeholder .category-icon {
+    width: 2.5rem; /* h-10 w-10 */
+    height: 2.5rem;
+    margin-bottom: 0.5rem;
+    stroke-width: 1.5; /* Thinner stroke for larger icons */
+}
+/* Specific icon colors */
+.icon-color-blue { color: #60a5fa; }
+.icon-color-purple { color: #a78bfa; }
+.icon-color-amber { color: #fbbf24; } /* Tailwind amber-400 */
+.icon-color-teal { color: #2dd4bf; } /* Tailwind teal-400 */
+.icon-color-gray { color: #9ca3af; }
+
+.item-card .card-header {
+    padding-bottom: 0.5rem; /* Less padding below title */
+}
+.item-card .card-title {
+    font-size: 1.1rem; /* text-lg */
+    margin-bottom: 0.25rem; /* Add space below title */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Prevent title wrapping */
+    flex-grow: 1; /* Allow title to take space */
+}
+.item-card .card-header .badge {
+    margin-left: 0.5rem; /* Space badge from title */
+}
+/* Ensure header content aligns properly */
+.item-card .card-header > div { /* Target the flex container */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align badge top */
+    width: 100%;
+}
+
+.item-card .card-content {
+    flex-grow: 1; /* Allow content to fill space */
+    padding-bottom: 0.75rem; /* Adjust spacing */
+}
+/* Description text styling */
+.description-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit description to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 1rem;
+    font-size: 0.875rem; /* text-sm */
+    color: #9ca3af; /* Muted color */
+    min-height: calc(1.6 * 0.875rem * 2); /* Reserve space for 2 lines */
+}
+.item-details-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem; /* text-xs or sm */
+    color: #9ca3af; /* Muted */
+    margin-bottom: 0.3rem;
+}
+.item-details-row .icon {
+    width: 0.9rem;
+    height: 0.9rem;
+    flex-shrink: 0; /* Prevent icon shrinking */
+    stroke-width: 2;
+}
+.item-card .card-footer {
+    padding-top: 0.75rem; /* Adjust spacing */
+    padding-bottom: 0.75rem;
+    margin-top: auto; /* Push footer to bottom */
+}
+.item-card .card-footer .button {
+    width: 100%; /* Make button full width */
+}
+
+/* Empty State */
+.item-grid-empty-state {
+    grid-column: 1 / -1; /* Span all columns */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    text-align: center;
+    color: #9ca3af; /* Muted color */
+}
+.empty-state-icon {
+    width: 3rem; /* h-12 w-12 */
+    height: 3rem;
+    margin-bottom: 0.75rem;
+    stroke-width: 1.5;
+}
+.empty-state-title {
+    font-size: 1.15rem; /* text-lg */
+    font-weight: 500;
+    color: #d1d5db; /* Lighter text for title */
+    margin-bottom: 0.25rem;
+}
+
+/* File Upload Area */
+.file-upload-area {
+    border: 2px dashed #4b5563; /* Darker dashed border */
+    border-radius: 0.375rem;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: default; /* Default cursor for the area */
+    background-color: rgba(255, 255, 255, 0.03); /* Very subtle background */
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.file-upload-area:has(input:hover), /* Style when hovering input/label */
+.file-upload-area:has(label:hover),
+.file-upload-area:hover { /* Also style on area hover */
+    background-color: rgba(255, 255, 255, 0.06);
+    border-color: #6b7280;
+}
+.upload-icon {
+    width: 2rem; /* h-8 w-8 */
+    height: 2rem;
+    color: #9ca3af; /* Muted color */
+    margin-bottom: 0.5rem;
+    stroke-width: 1.5;
+}
+.upload-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #d1d5db; /* Lighter text */
+}
+.upload-hint {
+    font-size: 0.75rem;
+    color: #9ca3af; /* Muted hint */
+    margin-top: 0.25rem;
+}
+.file-input-hidden {
+    display: none;
+}
+.browse-button {
+    margin-top: 0.75rem;
+    padding: 0.4rem 0.8rem; /* Smaller button */
+    cursor: pointer; /* Pointer cursor for the label styled as button */
+}
+.file-name-display {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    margin-top: 0.5rem;
+    text-align: center;
+    word-break: break-all; /* Prevent long filenames breaking layout */
+    min-height: 1.2em; /* Reserve space */
+}
+
+/* Textarea specific */
+.form-item textarea {
+    min-height: 60px; /* Adjust based on rows=3 */
+    resize: vertical;
+}
+/* --- END: Lost & Found Specific Styles --- */
+
+/* --- END: lost-found.css --- */

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Management</title>
+    <link rel="stylesheet" href="css/visitor.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <header class="page-header">
+            <div>
+                <h1>Visitor Management</h1>
+                <p class="muted">Track and manage campus visitors</p>
+            </div>
+            <button id="addVisitorBtn" class="button primary">
+                <i data-feather="user-plus" class="icon"></i> Add Visitor
+            </button>
+        </header>
+
+        <div class="stats-grid">
+            <div class="card">
+                <div class="card-content stat-card">
+                    <div>
+                        <p class="muted">Active Visitors</p>
+                        <p id="activeVisitorsCount" class="stat-number">
+                            <span class="loader"></span>
+                        </p>
+                    </div>
+                    <div class="stat-icon-bg green">
+                        <i data-feather="user-check" class="icon green-text"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                 <div class="card-content stat-card">
+                    <div>
+                        <p class="muted">Today's Check-ins</p>
+                        <p id="todayCheckinsCount" class="stat-number">
+                            <span class="loader"></span>
+                        </p>
+                    </div>
+                    <div class="stat-icon-bg teal">
+                        <i data-feather="calendar" class="icon teal-text"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                 <div class="card-content stat-card">
+                    <div>
+                        <p class="muted">Blacklisted</p>
+                        <p id="blacklistedCount" class="stat-number">
+                             <span class="loader"></span>
+                        </p>
+                    </div>
+                    <div class="stat-icon-bg red">
+                        <i data-feather="user-x" class="icon red-text"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Visitor Log</h2>
+                <p class="muted">Complete record of all campus visitors</p>
+            </div>
+            <div class="card-content">
+                <div id="visitorTableLoader" class="table-loader">
+                    <span class="loader"></span> Loading...
+                </div>
+                <table id="visitorTable" class="table hidden">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Purpose</th>
+                            <th>Check In</th>
+                            <th>Check Out</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="visitorTableBody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="addVisitorDialog" class="dialog-overlay hidden">
+        <div class="dialog-content">
+            <header class="dialog-header">
+                <div>
+                    <h2>Add New Visitor</h2>
+                    <p class="muted">Register a new visitor to the campus.</p>
+                </div>
+                <button id="closeDialogBtn" class="dialog-close-btn">&times;</button>
+            </header>
+
+            <div id="dialogFormContent">
+                <form id="visitorForm" class="form">
+                    <div class="form-item">
+                        <label for="visitorName">Visitor Name</label>
+                        <input type="text" id="visitorName" name="name" placeholder="Enter full name" required minlength="2">
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-item">
+                        <label for="visitorPurpose">Purpose of Visit</label>
+                        <textarea id="visitorPurpose" name="purpose" placeholder="Why is this person visiting?" required minlength="5"></textarea>
+                         <span class="error-message"></span>
+                    </div>
+                    <div class="form-item">
+                        <label for="visitorContact">Contact Information</label>
+                        <input type="text" id="visitorContact" name="contactInfo" placeholder="Phone number or email" required minlength="5">
+                         <span class="error-message"></span>
+                    </div>
+                    <div class="form-item">
+                        <label for="visitorHost">Host (Optional)</label>
+                        <input type="text" id="visitorHost" name="hostName" placeholder="Who are they visiting?">
+                         <span class="error-message"></span>
+                    </div>
+
+                     <button type="button" id="captureFaceBtn" class="button outline full-width">
+                        <i data-feather="camera" class="icon"></i> Capture Visitor's Face
+                    </button>
+
+                    <div class="dialog-footer">
+                        <button type="submit" class="button primary">Register Visitor</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="dialogFaceCaptureContent" class="hidden face-capture-section">
+                <h3>Capture Visitor's Face</h3>
+                <div class="face-placeholder">
+                    <i data-feather="video" style="width: 80px; height: 80px; color: #ccc;"></i>
+                    <p class="muted">Face capture simulation area</p>
+                </div>
+                 <button type="button" id="completeCaptureBtn" class="button primary full-width">
+                    Simulate Capture Complete
+                </button>
+                <button type="button" id="skipCaptureBtn" class="button outline full-width">
+                    Skip Face Capture
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="js/visitor.js"></script>
+    <script>
+        // Initialize Feather Icons
+        feather.replace();
+    </script>
+</body>
+</html>

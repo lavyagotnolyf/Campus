@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost & Found</title>
+    <link rel="stylesheet" href="css/lost-found.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <header class="page-header">
+            <div>
+                <h1>Lost & Found Portal</h1>
+                <p class="muted">Track and manage lost items on campus</p>
+            </div>
+            <button id="addItemBtn" class="button primary">
+                <i data-feather="plus" class="icon"></i> Add Lost Item
+            </button>
+        </header>
+
+        <div class="card mb-6">
+            <div class="card-content filter-bar">
+                 <div id="filterButtons" class="filter-buttons-container">
+                     <button class="button filter-button active" data-filter="all">All Items</button>
+                     <button class="button filter-button" data-filter="unclaimed">Unclaimed</button>
+                     <button class="button filter-button" data-filter="electronics">
+                        <i data-feather="smartphone" class="icon filter-icon"></i>Electronics
+                    </button>
+                     <button class="button filter-button" data-filter="clothing">
+                        <i data-feather="shopping-bag" class="icon filter-icon"></i>Clothing </button>
+                     <button class="button filter-button" data-filter="accessories">
+                        <i data-feather="watch" class="icon filter-icon"></i>Accessories
+                    </button>
+                     <button class="button filter-button" data-filter="documents">
+                        <i data-feather="file-text" class="icon filter-icon"></i>Documents
+                    </button>
+                    <button class="button filter-button" data-filter="other">
+                        <i data-feather="package" class="icon filter-icon"></i>Other
+                    </button>
+                 </div>
+            </div>
+        </div>
+
+        <div id="itemLoader" class="table-loader hidden">
+            <span class="loader"></span> Loading items...
+        </div>
+        <div id="itemGrid" class="item-grid">
+            </div>
+
+    </div>
+
+    <div id="addItemDialog" class="dialog-overlay hidden">
+        <div class="dialog-content">
+            <header class="dialog-header">
+                <div>
+                    <h2>Register Lost Item</h2>
+                    <p class="muted">Add details about a found item</p>
+                </div>
+                <button id="closeDialogBtn" class="dialog-close-btn">&times;</button>
+            </header>
+
+            <div id="dialogFormContent">
+                <form id="lostItemForm" class="form">
+                    <div class="form-item">
+                        <label for="itemName">Item Name</label>
+                        <input type="text" id="itemName" name="name" placeholder="What is the item?" required minlength="2">
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-item">
+                        <label for="itemDescription">Description</label>
+                        <textarea id="itemDescription" name="description" placeholder="Detailed description (color, brand, etc.)" required minlength="5" rows="3"></textarea>
+                         <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-item">
+                        <label for="itemLocation">Location Found</label>
+                        <input type="text" id="itemLocation" name="location" placeholder="Where was it found? (e.g., Library Floor 2)" required minlength="2">
+                         <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-item">
+                        <label for="itemCategory">Category</label>
+                        <select id="itemCategory" name="category" required class="select-input">
+                            <option value="other">Other</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="clothing">Clothing</option>
+                            <option value="accessories">Accessories</option>
+                            <option value="documents">Documents</option>
+                        </select>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="file-upload-area">
+                        <i data-feather="upload-cloud" class="upload-icon"></i>
+                        <p class="upload-text">Upload Image (Optional)</p>
+                        <p class="upload-hint">Drag & drop or click browse</p>
+                        <input type="file" id="itemImage" name="image" class="file-input-hidden" accept="image/*">
+                        <label for="itemImage" class="button outline browse-button">Browse File</label>
+                    </div>
+                    <div id="file-name-display" class="file-name-display"></div>
+
+                    <div class="dialog-footer">
+                         <button type="button" id="cancelDialogBtn" class="button outline">Cancel</button>
+                        <button type="submit" class="button primary">Add Item</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/lost-found.js"></script>
+    <script>
+        feather.replace(); // Initialize Feather Icons
+    </script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Tracking</title>
+    <link rel="stylesheet" href="css/vehicle-tracking.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <header class="page-header">
+            <div>
+                <h1>Vehicle Tracking</h1>
+                <p class="muted">Monitor and track vehicles on campus</p>
+            </div>
+            <button id="addVehicleBtn" class="button primary">
+                <i data-feather="plus-circle" class="icon"></i> Add Vehicle
+            </button>
+        </header>
+
+        <div class="stats-grid">
+            <div class="card">
+                <div class="card-content stat-card">
+                    <div>
+                        <p class="muted">Vehicles Inside</p>
+                        <p id="vehiclesInsideCount" class="stat-number">
+                            <span class="loader"></span>
+                        </p>
+                    </div>
+                    <div class="stat-icon-bg green">
+                        <i data-feather="truck" class="icon green-text"></i> </div>
+                </div>
+            </div>
+            <div class="card">
+                 <div class="card-content stat-card">
+                    <div>
+                        <p class="muted">Today's Entries</p>
+                        <p id="todayEntriesCount" class="stat-number">
+                            <span class="loader"></span>
+                        </p>
+                    </div>
+                    <div class="stat-icon-bg teal">
+                        <i data-feather="clock" class="icon teal-text"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                 <div class="card-content stat-card">
+                    <div>
+                        <p class="muted">Flagged Vehicles</p>
+                        <p id="flaggedVehiclesCount" class="stat-number">
+                             <span class="loader"></span>
+                        </p>
+                    </div>
+                    <div class="stat-icon-bg red">
+                        <i data-feather="flag" class="icon red-text"></i> </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Vehicle Registry</h2>
+                <p class="muted">All vehicles that have entered or exited the campus</p>
+            </div>
+            <div class="card-content">
+                <div id="vehicleTableLoader" class="table-loader">
+                    <span class="loader"></span> Loading...
+                </div>
+                <table id="vehicleTable" class="table hidden">
+                    <thead>
+                        <tr>
+                            <th>License Plate</th>
+                            <th>Make & Model</th>
+                            <th>Color</th>
+                            <th>Type</th>
+                            <th>Entry Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vehicleTableBody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="addVehicleDialog" class="dialog-overlay hidden">
+        <div class="dialog-content">
+            <header class="dialog-header">
+                <div>
+                    <h2>Register New Vehicle</h2>
+                    <p class="muted">Record details of a vehicle entering the campus</p>
+                </div>
+                <button id="closeDialogBtn" class="dialog-close-btn">&times;</button>
+            </header>
+
+            <div id="dialogFormContent">
+                <form id="vehicleForm" class="form">
+                    <div class="form-item">
+                        <label for="vehicleLicensePlate">License Plate</label>
+                        <input type="text" id="vehicleLicensePlate" name="licensePlate" placeholder="Enter license plate" required minlength="2">
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-grid-2"> <div class="form-item">
+                            <label for="vehicleMake">Make</label>
+                            <input type="text" id="vehicleMake" name="make" placeholder="Brand (e.g. Toyota)" required minlength="2">
+                             <span class="error-message"></span>
+                        </div>
+                        <div class="form-item">
+                            <label for="vehicleModel">Model</label>
+                            <input type="text" id="vehicleModel" name="model" placeholder="Model (e.g. Corolla)" required minlength="1">
+                             <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2"> <div class="form-item">
+                            <label for="vehicleColor">Color</label>
+                            <input type="text" id="vehicleColor" name="color" placeholder="Vehicle color" required minlength="1">
+                             <span class="error-message"></span>
+                        </div>
+                        <div class="form-item">
+                            <label for="vehicleType">Type</label>
+                            <select id="vehicleType" name="type" required class="select-input">
+                                <option value="unknown">Unknown</option>
+                                <option value="student">Student</option>
+                                <option value="staff">Staff</option>
+                                <option value="visitor">Visitor</option>
+                            </select>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-item">
+                        <label for="vehicleOwner">Owner (Optional)</label>
+                        <input type="text" id="vehicleOwner" name="owner" placeholder="Vehicle owner's name">
+                         <span class="error-message"></span> </div>
+
+                    <div class="dialog-footer">
+                         <button type="button" id="cancelDialogBtn" class="button outline">Cancel</button> <button type="submit" class="button primary">Register Vehicle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/vehicle-tracking.js"></script>
+    <script>
+        // Initialize Feather Icons
+        feather.replace();
+    </script>
+</body>
+</html>

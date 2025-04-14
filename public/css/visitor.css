@@ -1,0 +1,464 @@
+/* --- Reset & Base --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    color: #d1d5db; /* Default light text color (Tailwind gray-300) */
+
+    /* --- Background image settings from student-auth.css --- */
+    background-image: url('../assets/composition-9.png'); /* Adjust path if needed */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #ffffff; /* White headings */
+}
+
+h1 {
+    font-size: 1.75rem; /* Match student-auth */
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+h2 {
+   font-size: 1.15rem; /* Match student-auth */
+   font-weight: 600;
+   margin-bottom: 0.2rem;
+}
+
+h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+p {
+     /* Default paragraphs lighter */
+     color: #d1d5db;
+}
+
+p.muted {
+    color: #9ca3af; /* Lighter muted color (Tailwind gray-400) */
+    font-size: 0.875rem; /* text-sm */
+}
+
+a {
+    color: #60a5fa; /* Lighter blue for links (Tailwind blue-400) */
+    text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+/* --- Layout --- */
+.dashboard-layout {
+    max-width: 1200px;
+    margin: 2rem auto; /* Match student-auth */
+    padding: 0 1rem;
+}
+
+.page-header {
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.25rem;
+
+    /* --- Style properties copied/adapted from student-auth.css .page-header --- */
+    background-image: linear-gradient(to bottom right, #111827, #374151); /* Dark gradient */
+    color: #d1d5db; /* Default light text color */
+    border-radius: 0.75rem; /* Match card's border-radius */
+    border: 1px solid #4b5563; /* Match card's border */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2); /* Match card's shadow */
+    /* --- End of copied styles --- */
+
+    /* Overrides from original visitor management CSS */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-header h1 {
+    color: #ffffff; /* Ensure explicit white */
+}
+
+.page-header p.muted {
+    color: #9ca3af; /* Ensure explicit lighter muted color */
+    font-size: 0.95rem; /* Match student-auth */
+    margin-bottom: 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 1024px) { /* lg: */
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* --- Components --- */
+
+/* Card Styling (from student-auth.css) */
+.card {
+    background-image: linear-gradient(to bottom right, #111827, #374151);
+    color: #d1d5db; /* Default light text inside card */
+    border-radius: 0.75rem;
+    border: 1px solid #4b5563; /* Darker border */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+.card:hover {
+     box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    padding: 1rem 1.25rem; /* Match student-auth */
+    border-bottom: 1px solid #4b5563; /* Darker border */
+}
+.card-header h2 {
+    color: #ffffff; /* Explicitly white */
+}
+.card-header p.muted {
+     color: #9ca3af; /* Explicitly lighter muted */
+     font-size: 0.875rem;
+     margin-bottom: 0; /* Remove extra margin if needed */
+}
+
+.card-content {
+    padding: 1.25rem; /* Match student-auth */
+}
+
+/* Stat Card Specifics */
+.stat-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.stat-number {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 700; /* font-bold */
+    min-height: 28px;
+    color: #ffffff; /* Make numbers white */
+}
+.stat-card p.muted { /* Muted text within stat card */
+    color: #9ca3af;
+}
+
+/* Stat Icons */
+.stat-icon-bg {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Change: Use a neutral dark background for icons */
+    background-color: #374151; /* Tailwind gray-700 */
+}
+.stat-icon-bg .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    /* Icon colors remain bright */
+}
+/* Specific icon colors (ensure they are bright enough) */
+.icon.green-text { color: #22c55e; }
+.icon.teal-text { color: #14b8a6; }
+.icon.red-text { color: #ef4444; }
+
+
+/* Button Styling */
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1rem; /* Match student-auth action-button */
+    border-radius: 0.375rem;
+    font-size: 0.9rem; /* Match student-auth */
+    font-weight: 500;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.button .icon {
+    width: 1rem; /* w-4 */
+    height: 1rem; /* h-4 */
+    margin-right: 0.5rem; /* mr-2 */
+    /* Ensure icons inherit button color or are set explicitly */
+    stroke: currentColor;
+}
+
+/* Primary Button (matches action-button) */
+.button.primary {
+    background-color: #4f46e5; /* Indigo background */
+    color: white;
+    border: none; /* Remove border like action-button */
+}
+.button.primary:hover {
+    background-color: #4338ca; /* Darker indigo */
+}
+.button.primary:disabled {
+    background-color: #374151; /* Use a gray for disabled */
+    cursor: not-allowed;
+}
+.button.primary .loader { /* Make loader white in primary button */
+    color: white;
+}
+
+
+/* Outline Button (Adapted for dark theme) */
+.button.outline {
+    /* Change: Dark border, transparent background, light text */
+    border-color: #4b5563; /* Tailwind gray-600 */
+    background-color: transparent;
+    color: #d1d5db; /* Tailwind gray-300 */
+}
+.button.outline:hover {
+     /* Change: Slightly darker background on hover */
+    background-color: #374151; /* Tailwind gray-700 */
+    border-color: #6b7280; /* Tailwind gray-500 */
+    color: #ffffff; /* White text on hover */
+}
+
+.button.full-width {
+    width: 100%;
+    margin-top: 0.75rem;
+}
+
+
+/* Table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem; /* Add some space above table */
+}
+.table th, .table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #4b5563; /* Darker border */
+}
+.table th {
+    font-weight: 600; /* Slightly bolder */
+    color: #9ca3af; /* Lighter muted color */
+    font-size: 0.8rem; /* Slightly larger */
+    text-transform: uppercase;
+    background-color: #1f2937; /* Dark header bg (Tailwind gray-800) */
+}
+.table td {
+    font-size: 0.875rem;
+    color: #d1d5db; /* Default light text */
+}
+.table tbody tr:nth-child(even) {
+    background-color: #1f2937; /* Darker background for even rows */
+}
+.table tbody tr:hover {
+    background-color: #374151; /* Gray-700 on hover */
+}
+.table .text-center { text-align: center; }
+.table-loader {
+    text-align: center;
+    padding: 2rem;
+    color: #9ca3af; /* Lighter muted color */
+}
+
+/* Badge Styling (Revamped for Dark Theme) */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600; /* Bolder badges */
+    border: 1px solid transparent;
+    /* Base dark background for badges */
+    background-color: #374151; /* Tailwind gray-700 */
+}
+
+.badge-green {
+    /* Bright green text on dark background */
+    color: #4ade80; /* Tailwind green-400 */
+    background-color: rgba(34, 197, 94, 0.15); /* Darker green tint */
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+.badge-outline {
+     /* Lighter text, subtle border */
+    color: #9ca3af; /* Tailwind gray-400 */
+    background-color: #1f2937; /* Tailwind gray-800 */
+    border: 1px solid #4b5563; /* Tailwind gray-600 */
+}
+.badge-destructive {
+    /* Bright red text on dark background */
+    color: #f87171; /* Tailwind red-400 */
+    background-color: rgba(239, 68, 68, 0.15); /* Darker red tint */
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+.badge-secondary {
+    /* Same as outline for dark theme */
+    color: #9ca3af;
+    background-color: #1f2937;
+    border: 1px solid #4b5563;
+}
+
+
+/* Dialog (Modal) Styling */
+.dialog-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* Slightly darker overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+.dialog-content {
+    /* Apply dark card styling */
+    background-image: linear-gradient(to bottom right, #111827, #374151);
+    color: #d1d5db;
+    border-radius: 0.75rem;
+    border: 1px solid #4b5563;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    /* Rest of dialog styles */
+    padding: 0; /* Remove default padding, handle in sections */
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    overflow: hidden; /* Clip content to rounded corners */
+}
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #4b5563; /* Darker border */
+    padding: 1rem 1.25rem; /* Consistent padding */
+}
+.dialog-header h2 { color: #ffffff; }
+.dialog-header p.muted { color: #9ca3af; margin-bottom: 0; }
+
+.dialog-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #9ca3af; /* Lighter muted color */
+    padding: 0.25rem;
+    margin-top: -0.25rem; /* Adjust position */
+    margin-right: -0.5rem;
+}
+.dialog-close-btn:hover { color: #ffffff; }
+
+/* Dialog form content area */
+#dialogFormContent, #dialogFaceCaptureContent {
+     padding: 1.25rem; /* Add padding here */
+}
+
+.dialog-footer {
+    border-top: 1px solid #4b5563; /* Darker border */
+    padding: 1rem 1.25rem;
+    margin-top: 0; /* Remove margin as padding handles space */
+    display: flex;
+    justify-content: flex-end;
+    background-color: #1f2937; /* Slightly different footer bg */
+}
+
+/* Form Styling (inside Dialog) */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.form-item label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #d1d5db; /* Light color */
+}
+.form-item input, .form-item textarea {
+    width: 100%;
+    padding: 0.6rem; /* Match student-auth */
+    border: 1px solid #4b5563; /* Darker border */
+    border-radius: 0.375rem;
+    box-sizing: border-box;
+    font-size: 0.95rem;
+    /* Dark background, light text */
+    background-color: #1f2937; /* Tailwind gray-800 */
+    color: #ffffff;
+}
+.form-item textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+.form-item input::placeholder, .form-item textarea::placeholder {
+     color: #9ca3af; /* Lighter placeholder */
+}
+.form-item input:focus, .form-item textarea:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    border-color: #60a5fa; /* Lighter blue focus border */
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.3); /* Lighter blue focus ring */
+}
+.form-item .error-message {
+    color: #f87171; /* Lighter red for errors */
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    min-height: 1em;
+}
+
+/* Face Capture Section */
+.face-capture-section {
+    padding-top: 0; /* Remove extra top padding if covered by parent */
+}
+.face-placeholder {
+    background-color: #1f2937; /* Dark background */
+    border: 2px dashed #4b5563; /* Dark dashed border */
+    border-radius: 0.375rem;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.face-placeholder .icon {
+    color: #6b7280; /* Muted icon color */
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0.5rem;
+}
+.face-placeholder p.muted {
+     color: #9ca3af;
+}
+
+
+/* --- Utilities --- */
+.hidden {
+    display: none !important;
+}
+
+.loader {
+    display: inline-block;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid currentColor; /* Use button/text color */
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    vertical-align: middle;
+    margin-right: 0.25rem;
+    color: #9ca3af; /* Default loader color (light gray) */
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

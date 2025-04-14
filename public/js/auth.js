@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Hardcoded login successful!');
 
                 // --- >>> CHANGE: Redirect to student-auth.html <<< ---
-                window.location.href = 'student-auth.html';
+                window.location.href = 'index.html';
 
             } else {
                 // Login failed
