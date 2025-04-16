@@ -10,7 +10,6 @@ const StudentSchema = new mongoose.Schema({
     faceDescriptor: {      
         type: [Number]    
 }, 
-    timestamps: true // Optional: Adds createdAt/updatedAt fields
 });
 
 module.exports = mongoose.model('Student', StudentSchema, 'students'); // 'students' is the name of your collection
