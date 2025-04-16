@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Face Recognition Functions ---
     async function loadModels() {
-        const MODEL_URL = '/models'; // Path to where you downloaded the models
+        const MODEL_URL = '/public/models'; // Path to where you downloaded the models
         faceStatusMessage.textContent = 'Loading face recognition models...';
         scanButton.disabled = true; // Disable scan button while loading
 
@@ -74,8 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("Loading models from:", MODEL_URL);
             await Promise.all([
                 faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL),
-                //faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
-                //faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL)
+                faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
+                faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL)
             ]);
             console.log("Models loaded successfully!");
             modelsLoaded = true;
@@ -141,6 +141,46 @@ document.addEventListener('DOMContentLoaded', () => {
         faceapi.matchDimensions(overlayCanvas, videoElement);
     }
 
+    // --- Add this function to calculate descriptor from an image URL ---
+/* async function calculateDescriptorForImage(imageUrl) {
+    if (!modelsLoaded) {
+        console.error("Models not loaded yet, cannot calculate descriptor.");
+        return null;
+    }
+
+    try {
+        console.log(`Attempting to calculate descriptor for: ${imageUrl}`);
+        // Create an image element in memory
+        const img = document.createElement('img');
+        img.crossOrigin = 'anonymous'; // Helps if loading from different origins, good practice
+
+        // Load the image
+        img.src = imageUrl;
+        await new Promise((resolve, reject) => {
+            img.onload = resolve;
+            img.onerror = (err) => reject(`Could not load image: ${imageUrl}, Error: ${err}`);
+        });
+        console.log("Image loaded successfully.");
+
+        // Detect face and compute descriptor
+        console.log("Detecting face in image...");
+        const detection = await faceapi.detectSingleFace(img)
+            .withFaceLandmarks()
+            .withFaceDescriptor();
+
+        if (detection) {
+            console.log("Face detected in image, descriptor calculated.");
+            return detection.descriptor; // This is the Float32Array(128)
+        } else {
+            console.error(`No face detected in image: ${imageUrl}`);
+            return null;
+        }
+    } catch (error) {
+        console.error(`Error processing image ${imageUrl}:`, error);
+        return null;
+    }
+}
+ */
     if (scanButton) {
         scanButton.addEventListener('click', async () => {
             if (!modelsLoaded || !videoElement.srcObject || videoElement.paused) {
@@ -246,13 +286,30 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Could not find tab buttons to attach listeners.");
     } 
 
+
     // --- Initialisation ---
-    loadModels().then(() => {
-        console.log("Model loading process finished (check logs for success/failure).");
-        switchTab(activeTab);
-        if (activeTab === 'face') {
-            startWebcam();
-        }
-    });
+loadModels().then(async () => { // Add async here
+    console.log("Model loading process finished (check logs for success/failure).");
+
+    /* // --- TEMPORARY CODE TO GET DESCRIPTOR FOR ONE STUDENT ---
+    if (modelsLoaded) { // Only run if models actually loaded
+         const lavyaImageUrl = '/public/assets/images/lavya.png'; // <<< Make sure this path is correct!
+         console.log("Calculating descriptor for Lavya...");
+         const lavyaDescriptor = await calculateDescriptorForImage(lavyaImageUrl);
+         if (omkarDescriptor) {
+              // IMPORTANT: Log as a standard array for easy copying
+              console.log("Lavya Jain's Descriptor (Copy this array):", Array.from(lavyaDescriptor));
+         } else {
+              console.log("Could not calculate descriptor for Lavya.");
+         }
+    }
+    // --- END OF TEMPORARY CODE ---
+
+    // Continue with original initialization */
+    switchTab(activeTab);
+    if (activeTab === 'face') {
+        startWebcam();
+    }
+});
 
 }); // End DOMContentLoaded

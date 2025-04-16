@@ -7,7 +7,10 @@ const StudentSchema = new mongoose.Schema({
     rollNumber: { type: String },
     department: { type: String },
     photoUrl: { type: String },
-    // faceDescriptors: [Array] // We'll add this later
+    faceDescriptor: {      
+        type: [Number]    
+}, 
+    timestamps: true // Optional: Adds createdAt/updatedAt fields
 });
 
 module.exports = mongoose.model('Student', StudentSchema, 'students'); // 'students' is the name of your collection
