@@ -1,4 +1,4 @@
-require('dotenv').config({ path: __dirname + '/.env' });
+require('dotenv').config({ path: __dirname + '/../.env' });
 console.log("Loaded from .env:", process.env.MONGO_URI);
 const express = require('express');
 const bodyParser = require('body-parser');
